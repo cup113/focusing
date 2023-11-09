@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind utilities;
+
+.inner-input {
+    @apply rounded-md bg-green-700 invalid:bg-orange-500 px-2;
+}
