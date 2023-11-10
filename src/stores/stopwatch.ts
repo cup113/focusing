@@ -28,6 +28,7 @@ const useStopwatchStore = defineStore("stopwatch", () => {
         return Math.round((endTime.value.getTime() - deductedStartTime.value.getTime()) / 1000);
     });
     const running = ref(false);
+    const editWindowVisible = ref(false);
     const tag = useLocalStorage("FO_tag", "Default Task");
 
     const title = useTitle();
@@ -46,7 +47,12 @@ const useStopwatchStore = defineStore("stopwatch", () => {
 
     function start() {
         running.value = true;
-        deductedStartTime.value = new Date(deductedStartTime.value.getTime() + nowStore.now.getTime() - endTime.value.getTime());
+        if (durationSeconds.value === 0) {
+            startTime.value = nowStore.now;
+            deductedStartTime.value = nowStore.now;
+        } else {
+            deductedStartTime.value = new Date(deductedStartTime.value.getTime() + nowStore.now.getTime() - endTime.value.getTime());
+        }
         endTime.value = nowStore.now;
     }
 
@@ -57,11 +63,13 @@ const useStopwatchStore = defineStore("stopwatch", () => {
     function reset() {
         const historyStore = useHistoryStore();
 
-        historyStore.events.push({
-            name: tag.value,
-            timeStart: startTime.value,
-            msDuration: Math.round(durationSeconds.value * 1000),
-        });
+        if (durationSeconds.value > 0) {
+            historyStore.events.push({
+                name: tag.value,
+                timeStart: startTime.value,
+                msDuration: Math.round(durationSeconds.value * 1000),
+            });
+        }
 
         running.value = false;
         endTime.value = nowStore.now;
@@ -69,15 +77,26 @@ const useStopwatchStore = defineStore("stopwatch", () => {
         deductedStartTime.value = nowStore.now;
     }
 
+    function toggle_edit() {
+        editWindowVisible.value = !editWindowVisible.value;
+    }
+
+    function change_time(deltaSeconds: number) {
+        deductedStartTime.value = new Date(deductedStartTime.value.getTime() - deltaSeconds * 1000);
+    }
+
     return {
         running,
         startTime,
         durationSeconds,
         endTime,
+        editWindowVisible,
         tag,
         start,
         stop,
-        reset
+        reset,
+        toggle_edit,
+        change_time,
     };
 });
 

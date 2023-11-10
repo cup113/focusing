@@ -35,14 +35,17 @@ const items = computed({
 </script>
 
 <template>
-    <div class="text-3xl">History</div>
     <div>
-        <span>From</span><input type="number" placeholder="from #item" v-model="start" class="inner-input w-16">,
-        <span>Items</span><input type="number" placeholder="from #item" v-model="items" class="inner-input w-16">
-        ({{ historyStore.queryResult.start }}~{{ historyStore.queryResult.end }} / {{ historyStore.events.length }})</div>
-    <div>
-        <div v-for="event in historyStore.queryResult.events">
-            <HistoryEvent :event="event"></HistoryEvent>
+        <div class="text-3xl">History</div>
+        <div>
+            <span>From</span><input type="number" placeholder="from #item" v-model="start" class="inner-input w-16">,
+            <span>Items</span><input type="number" placeholder="from #item" v-model="items" class="inner-input w-16">
+            ({{ historyStore.queryResult.start }}~{{ historyStore.queryResult.end }} / {{ historyStore.events.length }})
+        </div>
+        <div>
+            <div v-for="event in historyStore.queryResult.events">
+                <HistoryEvent :event="event"></HistoryEvent>
+            </div>
         </div>
     </div>
 </template>

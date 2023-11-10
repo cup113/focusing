@@ -5,7 +5,7 @@ import History from './components/History.vue';
 </script>
 
 <template>
-  <div class="min-h-screen bg-green-800 text-white flex flex-col justify-center items-center">
+  <div class="min-h-screen bg-green-800 text-white flex flex-col justify-center items-center gap-4">
     <Now></Now>
     <Stopwatch></Stopwatch>
     <History></History>

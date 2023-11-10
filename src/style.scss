@@ -4,3 +4,7 @@
 .inner-input {
     @apply rounded-md bg-green-700 invalid:bg-orange-500 px-2;
 }
+
+.button {
+    @apply text-2xl border-2 border-black mx-2 px-2 bg-cyan-800;
+}

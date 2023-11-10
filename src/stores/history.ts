@@ -38,7 +38,7 @@ const useHistoryStore = defineStore("history", () => {
     });
     const viewSetting = useLocalStorage("FO_historyViewSetting", {
         start: 1,
-        items: 10,
+        items: 5,
     });
     const queryResult = computed(() => {
         const len = events.value.length;

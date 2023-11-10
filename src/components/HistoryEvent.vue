@@ -11,8 +11,8 @@ const duration = computed(() => format_time(props.event.msDuration / 1000));
 
 <template>
     <div class="flex gap-4">
-        <span class="font-bold">{{ event.name }}</span>
         <span>{{ timeStart }}</span>
         <span>{{ duration }}</span>
+        <span class="font-bold">{{ event.name }}</span>
     </div>
 </template>
